@@ -1,22 +1,41 @@
 import 'package:flutter/material.dart';
 
-class Constants {
-  static final Color blueColor = Color(0xff2b9ed4);
-  static final Color blackColor = Color(0xff19191b);
-  static final Color greyColor = Color(0xff8f8f8f);
-  static final Color userCircleBackground = Color(0xff2b2b33);
-  static final Color onlineDotColor = Color(0xff46dc64);
-  static final Color lightBlueColor = Color(0xff0077d7);
-  static final Color separatorColor = Color(0xff272c35);
+//             Values
+final double kLabelFontSize = 10;
 
-  static final Color gradientColorStart = Color(0xff00b6f3);
-  static final Color gradientColorEnd = Color(0xff0184dc);
+//             colors
+final Color kBlueColor = Color(0xff2b9ed4);
+final Color kBlackColor = Color(0xff19191b);
+final Color kGreyColor = Color(0xff8f8f8f);
+final Color kUserCircleBackground = Color(0xff2b2b33);
+final Color kOnlineDotColor = Color(0xff46dc64);
+final Color kLightBlueColor = Color(0xff0077d7);
+final Color kSeparatorColor = Color(0xff272c35);
 
-  static final Color senderColor = Color(0xff2b343b);
-  static final Color receiverColor = Color(0xff1e2225);
+final Color kGradientColorStart = Color(0xff00b6f3);
+final Color kGradientColorEnd = Color(0xff0184dc);
 
-  static final Gradient fabGradient = LinearGradient(
-      colors: [gradientColorStart, gradientColorEnd],
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight);
-}
+final Color kSenderColor = Color(0xff2b343b);
+final Color kReceiverColor = Color(0xff1e2225);
+
+final Gradient kFabGradient = LinearGradient(
+    colors: [kGradientColorStart, kGradientColorEnd],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight);
+
+//           Widgets
+final Widget kAlignedOnlineDot = Align(
+  alignment: Alignment.bottomRight,
+  child: Container(
+    width: 12.0,
+    height: 12.0,
+    decoration: BoxDecoration(
+      shape: BoxShape.circle,
+      border: Border.all(
+        color: kBlackColor,
+        width: 2,
+      ),
+      color: kOnlineDotColor,
+    ),
+  ),
+);

@@ -17,7 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Constants.blackColor,
+      backgroundColor: kBlackColor,
       body: Stack(
         children: [
           Center(
@@ -36,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget loginButton() {
     return Shimmer.fromColors(
       baseColor: Colors.white,
-      highlightColor: Constants.senderColor,
+      highlightColor: kSenderColor,
       child: FlatButton(
         padding: EdgeInsets.all(35),
         child: Text(

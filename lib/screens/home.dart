@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:skypeclone/screens/pageviews/chat_list_screen.dart';
 import 'package:skypeclone/utils/constants.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -9,6 +11,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   PageController pageController;
+
   int _page = 0;
 
   @override
@@ -29,18 +32,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double _labelFontSize = 10;
-
     return Scaffold(
-      backgroundColor: Constants.blackColor,
+      backgroundColor: kBlackColor,
       body: PageView(
         children: <Widget>[
-          Center(
-            child: Text(
-              "Chat List Screen",
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
+          ChatListScreen(),
           Center(
             child: Text(
               "Call Logs",
@@ -56,59 +52,54 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         controller: pageController,
         onPageChanged: onPageChanged,
+        physics: NeverScrollableScrollPhysics(),
       ),
       bottomNavigationBar: Container(
-        child: CupertinoTabBar(
-          backgroundColor: Constants.blackColor,
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.chat,
-                color: (_page == 0)
-                    ? Constants.lightBlueColor
-                    : Constants.greyColor,
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 10.0),
+          child: CupertinoTabBar(
+            backgroundColor: kBlackColor,
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(
+                  MdiIcons.commentText,
+                  color: (_page == 0) ? kLightBlueColor : kGreyColor,
+                ),
+                title: Text(
+                  "Chats",
+                  style: TextStyle(
+                      fontSize: kLabelFontSize,
+                      color: (_page == 0) ? kLightBlueColor : Colors.grey),
+                ),
               ),
-              title: Text(
-                "Chats",
-                style: TextStyle(
-                    fontSize: _labelFontSize,
-                    color:
-                        (_page == 0) ? Constants.lightBlueColor : Colors.grey),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  MdiIcons.phone,
+                  color: (_page == 1) ? kLightBlueColor : kGreyColor,
+                ),
+                title: Text(
+                  "Calls",
+                  style: TextStyle(
+                      fontSize: kLabelFontSize,
+                      color: (_page == 1) ? kLightBlueColor : Colors.grey),
+                ),
               ),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.call,
-                color: (_page == 1)
-                    ? Constants.lightBlueColor
-                    : Constants.greyColor,
+              BottomNavigationBarItem(
+                icon: Icon(
+                  MdiIcons.cardAccountPhone,
+                  color: (_page == 2) ? kLightBlueColor : kGreyColor,
+                ),
+                title: Text(
+                  "Contacts",
+                  style: TextStyle(
+                      fontSize: kLabelFontSize,
+                      color: (_page == 2) ? kLightBlueColor : Colors.grey),
+                ),
               ),
-              title: Text(
-                "Calls",
-                style: TextStyle(
-                    fontSize: _labelFontSize,
-                    color:
-                        (_page == 1) ? Constants.lightBlueColor : Colors.grey),
-              ),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.contact_phone,
-                color: (_page == 2)
-                    ? Constants.lightBlueColor
-                    : Constants.greyColor,
-              ),
-              title: Text(
-                "Contacts",
-                style: TextStyle(
-                    fontSize: _labelFontSize,
-                    color:
-                        (_page == 2) ? Constants.lightBlueColor : Colors.grey),
-              ),
-            ),
-          ],
-          onTap: navigationTapped,
-          currentIndex: _page,
+            ],
+            onTap: navigationTapped,
+            currentIndex: _page,
+          ),
         ),
       ),
     );

@@ -1,6 +1,5 @@
 import "package:flutter/material.dart";
 import 'package:skypeclone/resources/firebase_repositry.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:skypeclone/screens/home.dart';
 import 'package:skypeclone/screens/login.dart';
@@ -14,6 +13,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   FirebaseRepositry _repositry = FirebaseRepositry();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

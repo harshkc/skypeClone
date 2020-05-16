@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:skypeclone/models/message.dart';
 import 'package:skypeclone/utils/constants.dart';
+import 'package:skypeclone/widgets/cached_image.dart';
 
 class ChatLayout extends StatelessWidget {
-  bool isSender = true;
-  ChatLayout({@required this.isSender});
-  Radius messageRadius = Radius.circular(10);
+  final bool isSender;
+  final Message message;
+  final Radius messageRadius = Radius.circular(10);
+
+  ChatLayout({this.isSender = true, @required this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +32,27 @@ class ChatLayout extends StatelessWidget {
       ),
       child: Padding(
         padding: EdgeInsets.all(10.0),
-        child: Text(
-          "Hello",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-          ),
-        ),
+        child: getMessage(message),
       ),
     );
+  }
+
+  getMessage(Message message) {
+    return message.type != "image"
+        ? Text(
+            message.message,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+            ),
+          )
+        : message.photoUrl != null
+            ? CachedImage(
+                message.photoUrl,
+                height: 250,
+                width: 250,
+                radius: 10,
+              )
+            : Text("Url was null");
   }
 }

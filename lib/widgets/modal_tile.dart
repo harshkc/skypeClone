@@ -6,11 +6,13 @@ class ModalTile extends StatelessWidget {
   final String title;
   final IconData icon;
   final String subtitle;
+  final Function onTap;
 
   ModalTile({
     @required this.title,
     this.icon,
     this.subtitle,
+    this.onTap,
   });
 
   @override
@@ -47,6 +49,7 @@ class ModalTile extends StatelessWidget {
             color: kGreyColor,
           ),
         ),
+        onPressed: onTap,
       ),
     );
   }

@@ -6,6 +6,7 @@ import 'package:skypeclone/resources/firebase_repositry.dart';
 import 'package:skypeclone/utils/constants.dart';
 import 'package:skypeclone/widgets/custom_tile.dart';
 
+import 'call_screens/pickups/pickup_layout.dart';
 import 'chat_screens/chat_screen.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -34,12 +35,14 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: kBlackColor,
-      appBar: appBar(context),
-      body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
-        child: buildSuggestions(query),
+    return PickupLayout(
+      scaffold: Scaffold(
+        backgroundColor: kBlackColor,
+        appBar: appBar(context),
+        body: Container(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          child: buildSuggestions(query),
+        ),
       ),
     );
   }

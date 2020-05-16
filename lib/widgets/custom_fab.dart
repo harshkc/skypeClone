@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:skypeclone/utils/constants.dart';
 
 class CustomFAB extends StatelessWidget {
@@ -11,9 +12,9 @@ class CustomFAB extends StatelessWidget {
       ),
       child: IconButton(
         icon: Icon(
-          Icons.edit,
+          MdiIcons.pencilOutline,
           color: Colors.white,
-          size: 25.0,
+          size: 30.0,
         ),
         onPressed: () {},
       ),

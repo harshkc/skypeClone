@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skypeclone/resources/firebase_repositry.dart';
+import 'package:skypeclone/screens/call_screens/pickups/pickup_layout.dart';
 import 'package:skypeclone/utils/constants.dart';
 import 'package:skypeclone/utils/utilities.dart';
 import 'package:skypeclone/widgets/chat_list_container.dart';
@@ -32,11 +33,13 @@ class _ChatListScreenState extends State<ChatListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: kBlackColor,
-      appBar: customAppBar(context),
-      floatingActionButton: CustomFAB(),
-      body: ChatListContainer(currentUserId: currentUserId),
+    return PickupLayout(
+      scaffold: Scaffold(
+        backgroundColor: kBlackColor,
+        appBar: customAppBar(context),
+        floatingActionButton: CustomFAB(),
+        body: ChatListContainer(currentUserId: currentUserId),
+      ),
     );
   }
 
@@ -56,7 +59,9 @@ class _ChatListScreenState extends State<ChatListScreen> {
             Icons.search,
             color: Colors.white,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, "/search_screen");
+          },
         ),
         IconButton(
           icon: Icon(

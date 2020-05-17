@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:skypeclone/models/call.dart';
+import 'package:skypeclone/utils/strings.dart';
 
 class CallMethods {
   //accesing the calls collection in database and using a variable to store it
-  CollectionReference _callCollection = Firestore.instance.collection("calls");
+  CollectionReference _callCollection =
+      Firestore.instance.collection(CALL_COLLECTION);
 
   Stream<DocumentSnapshot> callStream({String uid}) =>
       _callCollection.document(uid).snapshots();

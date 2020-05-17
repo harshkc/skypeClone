@@ -9,15 +9,17 @@ import 'package:skypeclone/enum/view_state.dart';
 import 'package:skypeclone/models/message.dart';
 import 'package:skypeclone/models/user.dart';
 import 'package:skypeclone/provider/image_upload_provider.dart';
-import 'package:skypeclone/resources/firebase_repositry.dart';
+import 'package:skypeclone/resources/auth_methods.dart';
+import 'package:skypeclone/resources/chat_methods.dart';
+import 'package:skypeclone/resources/storage_methods.dart';
 import 'package:skypeclone/screens/call_screens/pickups/pickup_layout.dart';
 import 'package:skypeclone/utils/call_utilities.dart';
 import 'package:skypeclone/utils/constants.dart';
+import 'package:skypeclone/utils/file_utilities.dart';
 import 'package:skypeclone/utils/permissions.dart';
-import 'package:skypeclone/utils/utilities.dart';
-import 'package:skypeclone/widgets/chat_layout.dart';
 import 'package:skypeclone/widgets/custom_app_bar.dart';
-import 'package:skypeclone/widgets/modal_tile.dart';
+import 'package:skypeclone/widgets/chat_screen/chat_layout.dart';
+import 'package:skypeclone/widgets/chat_screen/modal_tile.dart';
 
 class ChatScreen extends StatefulWidget {
   final User receiver;
@@ -29,7 +31,9 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  FirebaseRepositry _repositry = FirebaseRepositry();
+  AuthMethods _authMethods = AuthMethods();
+  ChatMethods _chatMethods = ChatMethods();
+  StorageMethods _storageMethods = StorageMethods();
 
   User sender;
   ImageUploadProvider _imageUploadProvider;
@@ -46,7 +50,7 @@ class _ChatScreenState extends State<ChatScreen> {
   void initState() {
     super.initState();
 
-    _repositry.getCurrentUser().then((user) {
+    _authMethods.getCurrentUser().then((user) {
       _currentUserId = user.uid;
 
       setState(() {
@@ -97,11 +101,11 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   void pickImage({@required ImageSource source}) async {
-    File selectedImage = await Utils.pickImage(source: source);
+    File selectedImage = await FileUtils.pickImage(source: source);
     selectedImage != null
         ?
         //To call the driver function in methods file
-        _repositry.uploadImage(
+        _storageMethods.uploadImage(
             imageFile: selectedImage,
             receiverId: widget.receiver.uid,
             senderId: _currentUserId,
@@ -263,7 +267,11 @@ class _ChatScreenState extends State<ChatScreen> {
         isWriting = false;
       });
 
-      _repositry.addMsgToDb(sender, widget.receiver, _message);
+      _chatMethods.addMessageToDb(
+        message: _message,
+        sender: sender,
+        receiver: widget.receiver,
+      );
     }
 
     return Container(

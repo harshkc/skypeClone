@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-//             Values
+///Values///
 final double kLabelFontSize = 10;
 
-//             colors
+///Values///
+
+///colors///
 final Color kBlueColor = Color(0xff2b9ed4);
 final Color kBlackColor = Color(0xff19191b);
 final Color kGreyColor = Color(0xff8f8f8f);
@@ -22,6 +24,8 @@ final Gradient kFabGradient = LinearGradient(
     colors: [kGradientColorStart, kGradientColorEnd],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight);
+
+///colors///
 
 //           Widgets
 final Widget kAlignedOnlineDot = Align(

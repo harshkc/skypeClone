@@ -2,10 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:skypeclone/models/user.dart';
-import 'package:skypeclone/resources/firebase_repositry.dart';
+import 'package:skypeclone/resources/auth_methods.dart';
 import 'package:skypeclone/utils/constants.dart';
 import 'package:skypeclone/widgets/custom_tile.dart';
-
 import 'call_screens/pickups/pickup_layout.dart';
 import 'chat_screens/chat_screen.dart';
 
@@ -15,7 +14,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  FirebaseRepositry _repositry = FirebaseRepositry();
+  AuthMethods _authMethods = AuthMethods();
 
   List<User> userList;
   String query = "";
@@ -24,8 +23,8 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void initState() {
     super.initState();
-    _repositry.getCurrentUser().then((FirebaseUser currentUser) {
-      _repositry.fetchAllUsers(currentUser).then((List<User> users) {
+    _authMethods.getCurrentUser().then((FirebaseUser currentUser) {
+      _authMethods.fetchAllUsers(currentUser).then((List<User> users) {
         setState(() {
           userList = users;
         });

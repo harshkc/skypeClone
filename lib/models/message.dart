@@ -35,7 +35,7 @@ class Message {
     map['receiverId'] = this.receiverId;
     map['message'] = this.message;
     map['type'] = this.type;
-    map['timeStamp'] = this.timeStamp;
+    map['timestamp'] = this.timeStamp;
     return map;
   }
 
@@ -46,7 +46,7 @@ class Message {
     map['receiverId'] = this.receiverId;
     map['message'] = this.message;
     map['type'] = this.type;
-    map['timeStamp'] = this.timeStamp;
+    map['timestamp'] = this.timeStamp;
     map['photoUrl'] = this.photoUrl;
     return map;
   }
@@ -57,7 +57,7 @@ class Message {
     this.receiverId = map['receiverId'];
     this.message = map['message'];
     this.type = map['type'];
-    this.timeStamp = map['timeStamp'];
+    this.timeStamp = map['timestamp'];
     this.photoUrl = map['photoUrl'];
   }
 }

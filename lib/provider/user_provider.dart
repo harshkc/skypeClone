@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:skypeclone/models/user.dart';
-import 'package:skypeclone/resources/firebase_repositry.dart';
+import 'package:skypeclone/resources/auth_methods.dart';
 
 class UserProvider with ChangeNotifier {
   User _user;
-  FirebaseRepositry _repositry = FirebaseRepositry();
+  AuthMethods _authMethods = AuthMethods();
 
   User get getUser => _user;
 
-  void refreshUser() async {
-    User user = await _repositry.getUserDetails();
+  Future<void> refreshUser() async {
+    User user = await _authMethods.getUserDetails();
     _user = user;
     notifyListeners();
   }

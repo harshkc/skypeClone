@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:skypeclone/resources/firebase_repositry.dart';
+import 'package:skypeclone/resources/auth_methods.dart';
 import 'package:skypeclone/screens/home.dart';
 import 'package:skypeclone/utils/constants.dart';
 
@@ -11,7 +11,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  FirebaseRepositry _repositry = FirebaseRepositry();
+  AuthMethods _authMethods = AuthMethods();
+
   bool isLoginPressed = false;
 
   @override
@@ -57,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       isLoginPressed = true;
     });
-    _repositry.signIn().then(
+    _authMethods.signIn().then(
       (FirebaseUser user) {
         print("working");
         if (user != null) {
@@ -70,10 +71,10 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void authenticateUser(FirebaseUser user) {
-    _repositry.authenticateUser(user).then(
+    _authMethods.authenticateUser(user).then(
       (isNewUser) {
         if (isNewUser) {
-          _repositry.addDataToDb(user).then(
+          _authMethods.addDataToDb(user).then(
             (value) {
               Navigator.pushReplacement(
                 context,

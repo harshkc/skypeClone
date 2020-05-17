@@ -10,13 +10,13 @@ class CustomFAB extends StatelessWidget {
         gradient: kFabGradient,
         borderRadius: BorderRadius.circular(50),
       ),
-      child: IconButton(
-        icon: Icon(
+      child: GestureDetector(
+        child: Icon(
           MdiIcons.pencilOutline,
           color: Colors.white,
           size: 30.0,
         ),
-        onPressed: () {},
+        onTap: () {},
       ),
       padding: EdgeInsets.all(7.5),
     );

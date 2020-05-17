@@ -2,8 +2,8 @@ import "package:flutter/material.dart";
 import 'package:provider/provider.dart';
 import 'package:skypeclone/provider/image_upload_provider.dart';
 import 'package:skypeclone/provider/user_provider.dart';
-import 'package:skypeclone/resources/firebase_repositry.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:skypeclone/resources/auth_methods.dart';
 import 'package:skypeclone/screens/home.dart';
 import 'package:skypeclone/screens/login.dart';
 import 'package:skypeclone/screens/search_screen.dart';
@@ -17,7 +17,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  FirebaseRepositry _repositry = FirebaseRepositry();
+  AuthMethods _authMethods = AuthMethods();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class _MyAppState extends State<MyApp> {
           scaffoldBackgroundColor: kBlackColor,
         ),
         home: FutureBuilder(
-          future: _repositry.getCurrentUser(),
+          future: _authMethods.getCurrentUser(),
           builder: (context, AsyncSnapshot<FirebaseUser> snapshot) {
             if (!snapshot.hasData) {
               return LoginScreen();

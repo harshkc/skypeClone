@@ -45,7 +45,8 @@ class PickupScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                GestureDetector(
+                MaterialButton(
+                  elevation: 5.0,
                   child: Container(
                     padding: EdgeInsets.all(12.0),
                     decoration: BoxDecoration(
@@ -58,10 +59,11 @@ class PickupScreen extends StatelessWidget {
                       size: 35.0,
                     ),
                   ),
-                  onTap: () async => await callMethods.endCall(call: call),
+                  onPressed: () async => await callMethods.endCall(call: call),
                 ),
                 SizedBox(width: 45.0),
-                GestureDetector(
+                MaterialButton(
+                  elevation: 5.0,
                   child: Container(
                     padding: EdgeInsets.all(12.0),
                     decoration: BoxDecoration(
@@ -74,7 +76,7 @@ class PickupScreen extends StatelessWidget {
                       size: 35.0,
                     ),
                   ),
-                  onTap: () async =>
+                  onPressed: () async =>
                       await Permissions.cameraAndMicrophonePermissionsGranted()
                           ? Navigator.push(
                               context,

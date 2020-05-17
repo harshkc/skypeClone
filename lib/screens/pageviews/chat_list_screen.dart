@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:skypeclone/resources/firebase_repositry.dart';
+import 'package:skypeclone/resources/auth_methods.dart';
 import 'package:skypeclone/screens/call_screens/pickups/pickup_layout.dart';
 import 'package:skypeclone/utils/constants.dart';
 import 'package:skypeclone/utils/utilities.dart';
-import 'package:skypeclone/widgets/chat_list_container.dart';
+import 'package:skypeclone/widgets/chat_list_screen/chat_list_container.dart';
+import 'package:skypeclone/widgets/chat_list_screen/custom_fab.dart';
 import 'package:skypeclone/widgets/custom_app_bar.dart';
-import 'package:skypeclone/widgets/custom_fab.dart';
 import 'package:skypeclone/widgets/user_circle.dart';
 
 class ChatListScreen extends StatefulWidget {
@@ -16,14 +16,15 @@ class ChatListScreen extends StatefulWidget {
 }
 
 class _ChatListScreenState extends State<ChatListScreen> {
-  FirebaseRepositry _repositry = FirebaseRepositry();
+  AuthMethods _authMethods = AuthMethods();
+
   String currentUserId;
   String initials;
 
   @override
   void initState() {
     super.initState();
-    _repositry.getCurrentUser().then((user) {
+    _authMethods.getCurrentUser().then((user) {
       setState(() {
         currentUserId = user.uid;
         initials = Utils.getInitials(user.displayName);

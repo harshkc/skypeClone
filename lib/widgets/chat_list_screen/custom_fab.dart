@@ -18,7 +18,7 @@ class CustomFAB extends StatelessWidget {
         ),
         onTap: () {},
       ),
-      padding: EdgeInsets.all(7.5),
+      padding: EdgeInsets.all(11.5),
     );
   }
 }

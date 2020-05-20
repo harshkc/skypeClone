@@ -17,6 +17,7 @@ import 'package:skypeclone/utils/call_utilities.dart';
 import 'package:skypeclone/utils/constants.dart';
 import 'package:skypeclone/utils/file_utilities.dart';
 import 'package:skypeclone/utils/permissions.dart';
+import 'package:skypeclone/utils/strings.dart';
 import 'package:skypeclone/widgets/custom_app_bar.dart';
 import 'package:skypeclone/widgets/chat_screen/chat_layout.dart';
 import 'package:skypeclone/widgets/chat_screen/modal_tile.dart';
@@ -372,7 +373,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   child: GestureDetector(
                     child: Icon(
                       MdiIcons.sendOutline,
-                      size: 16.0,
+                      size: 18.0,
                       color: Colors.white,
                     ),
                     onTap: () {
@@ -391,10 +392,10 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget messageList() {
     return StreamBuilder(
       stream: Firestore.instance
-          .collection("messages")
+          .collection(MESSAGES_COLLECTION)
           .document(_currentUserId)
           .collection(widget.receiver.uid)
-          .orderBy("timeStamp", descending: true)
+          .orderBy(TIMESTAMP_FIELD, descending: true)
           .snapshots(),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData) {

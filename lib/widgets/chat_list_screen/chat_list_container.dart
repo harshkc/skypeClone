@@ -1,50 +1,41 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:skypeclone/models/contact.dart';
+import 'package:skypeclone/provider/user_provider.dart';
+import 'package:skypeclone/resources/chat_methods.dart';
 import 'package:skypeclone/utils/constants.dart';
-import 'package:skypeclone/widgets/custom_tile.dart';
+import 'package:skypeclone/widgets/chat_list_screen/contact_view.dart';
+import 'package:skypeclone/widgets/quiet_box.dart';
 
-class ChatListContainer extends StatefulWidget {
-  ChatListContainer({@required this.currentUserId});
-
-  final String currentUserId;
-
-  @override
-  _ChatListContainerState createState() => _ChatListContainerState();
-}
-
-class _ChatListContainerState extends State<ChatListContainer> {
+class ChatListContainer extends StatelessWidget {
+  final ChatMethods _chatMethods = ChatMethods();
   @override
   Widget build(BuildContext context) {
+    final UserProvider userProvider = Provider.of<UserProvider>(context);
     return Container(
-      child: ListView.builder(
-        padding: EdgeInsets.all(10.0),
-        itemCount: 2,
-        itemBuilder: (context, index) {
-          return CustomTile(
-            mini: false,
-            onPressed: () {},
-            title: Text(
-              "Harsh Choudhary",
-              style: TextStyle(
-                  color: Colors.white, fontFamily: "Arial", fontSize: 19.0),
-            ),
-            subtitle: Text(
-              "Hello there!!",
-              style: TextStyle(color: kGreyColor, fontSize: 14.0),
-            ),
-            leading: Container(
-              constraints: BoxConstraints(maxHeight: 60.0, maxWidth: 60.0),
-              child: Stack(
-                children: <Widget>[
-                  CircleAvatar(
-                    maxRadius: 30.0,
-                    backgroundColor: Colors.grey,
-                    backgroundImage: NetworkImage(
-                      "https://instagram.fagr1-1.fna.fbcdn.net/v/t51.2885-19/s320x320/89859496_210935153553074_1500473290446077952_n.jpg?_nc_ht=instagram.fagr1-1.fna.fbcdn.net&_nc_ohc=y2wc-6i7cuUAX9eHoZ1&oh=a7ee62727b0dd4065bf18ad5711eeead&oe=5EDDC52D",
-                    ),
-                  ),
-                  kAlignedOnlineDot, //online dot Widget Aligned bottom right
-                ],
-              ),
+      child: StreamBuilder<QuerySnapshot>(
+        stream: _chatMethods.fetchAllContacts(userId: userProvider.getUser.uid),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            var docList = snapshot.data.documents;
+
+            if (docList.isEmpty) {
+              return QuietBox();
+            }
+            return ListView.builder(
+              padding: EdgeInsets.all(10.0),
+              itemCount: docList.length,
+              itemBuilder: (context, index) {
+                Contact contact = Contact.fromMap(docList[index].data);
+
+                return ContactView(contact: contact);
+              },
+            );
+          }
+          return Center(
+            child: CircularProgressIndicator(
+              backgroundColor: kGradientColorEnd,
             ),
           );
         },

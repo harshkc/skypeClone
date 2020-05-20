@@ -53,21 +53,19 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void performLogin() {
-    print("logining In");
+  void performLogin() async {
+    FirebaseUser user = await _authMethods.signIn();
+
     setState(() {
       isLoginPressed = true;
     });
-    _authMethods.signIn().then(
-      (FirebaseUser user) {
-        print("working");
-        if (user != null) {
-          authenticateUser(user);
-        } else {
-          print("There was an Error");
-        }
-      },
-    );
+
+    if (user != null) {
+      authenticateUser(user);
+    }
+    setState(() {
+      isLoginPressed = false;
+    });
   }
 
   void authenticateUser(FirebaseUser user) {

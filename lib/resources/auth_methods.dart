@@ -52,20 +52,26 @@ class AuthMethods {
 
   ///SigningIn User///
   Future<FirebaseUser> signIn() async {
-    //google signIn
-    GoogleSignInAccount _signInAccount = await _googleSignIn.signIn();
+    try {
+      //google signIn
+      GoogleSignInAccount _signInAccount = await _googleSignIn.signIn();
 
-    GoogleSignInAuthentication _signInAuthentication =
-        await _signInAccount.authentication;
+      GoogleSignInAuthentication _signInAuthentication =
+          await _signInAccount.authentication;
 
-    //creating credential object for signIn purposes
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
-        accessToken: _signInAuthentication.accessToken,
-        idToken: _signInAuthentication.idToken);
+      //creating credential object for signIn purposes
+      final AuthCredential credential = GoogleAuthProvider.getCredential(
+          accessToken: _signInAuthentication.accessToken,
+          idToken: _signInAuthentication.idToken);
 
-    AuthResult result = await _auth.signInWithCredential(credential);
+      AuthResult result = await _auth.signInWithCredential(credential);
 
-    return result.user;
+      return result.user;
+    } catch (e) {
+      print("Auth methods error");
+      print(e);
+      return null;
+    }
   }
 
   ///SigningIn User///
@@ -123,9 +129,15 @@ class AuthMethods {
   ///Brain of Search feature///
 
   ///Signing Out///
-  Future<void> signOut() async {
-    await _googleSignIn.signOut();
-    return await _auth.signOut();
+  Future<bool> signOut() async {
+    try {
+      await _googleSignIn.signOut();
+      await _auth.signOut();
+      return true;
+    } catch (e) {
+      print("Error in signout method - $e");
+      return false;
+    }
   }
 
   ///Signing Out///

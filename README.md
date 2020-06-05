@@ -2,15 +2,43 @@
 
 Skype clone : Names says it all
 
-## Getting Started
+Packages used:
+ # For making request to firestore database
+  cloud_firestore: ^0.13.5
 
-This project is a starting point for a Flutter application.
+  #permissions handling
+  permission_handler: 3.0.0
 
-A few resources to get you started if this is your first Flutter project:
+  # For handling authentication via firebase
+  firebase_auth: ^0.16.0
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+  # For handling google sign in
+  google_sign_in: ^4.4.4
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+  # for Skype like outline icons
+  material_design_icons_flutter: ^4.0.5145
+
+  # for shimmer effect
+  shimmer: ^1.1.1
+
+  # Emojies
+  emoji_picker: ^0.1.0
+
+  # image_picker
+  image_picker: ^0.6.6+1
+
+  # provider state management
+  provider: ^4.0.3
+
+  # firebase storage for storing images and stuffs
+  firebase_storage: ^3.1.5
+
+  # for using paths in apps
+  path_provider: ^1.6.8
+
+  # for caching image for great user experience
+  cached_network_image: ^2.2.0+1
+
+  # Video calling engine
+  agora_rtc_engine: ^1.0.8
+

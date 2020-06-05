@@ -1,6 +1,6 @@
-# skypeclone
+# Skypeclone
 
-Skype clone : Names says it all
+Skype clone : Names says it all.
 
 Packages used:
  # For making request to firestore database

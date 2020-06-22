@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:skypeclone/enum/user_state.dart';
 
 class Utils {
@@ -36,4 +37,14 @@ class Utils {
   }
 
   ///UserState utils///
+
+  ///Date Time Formatter///
+
+  static String formatDateString(String dateString) {
+    DateTime dateTime = DateTime.parse(dateString);
+    var formatter = DateFormat("dd/MM/yy");
+    return formatter.format(dateTime);
+  }
+
+  ///Date Time Formatter///
 }

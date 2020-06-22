@@ -6,7 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:skypeclone/enum/user_state.dart';
 import 'package:skypeclone/provider/user_provider.dart';
 import 'package:skypeclone/resources/auth_methods.dart';
-import 'package:skypeclone/screens/pageviews/chat_list_screen.dart';
+import 'package:skypeclone/screens/pageviews/chats/chat_list_screen.dart';
+import 'package:skypeclone/screens/pageviews/logs/log_screen.dart';
 import 'package:skypeclone/utils/constants.dart';
 
 import 'call_screens/pickups/pickup_layout.dart';
@@ -73,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 userId: currentUserId,
                 userState: UserState.Offline,
               )
-            : print("Application resumed");
+            : print("Application inactive");
         break;
       case AppLifecycleState.paused:
         currentUserId != null
@@ -81,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 userId: currentUserId,
                 userState: UserState.Waiting,
               )
-            : print("Application resumed");
+            : print("Application paused");
         break;
       case AppLifecycleState.detached:
         currentUserId != null
@@ -89,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 userId: currentUserId,
                 userState: UserState.Offline,
               )
-            : print("Application resumed");
+            : print("Application detached");
         break;
     }
   }
@@ -112,12 +113,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         body: PageView(
           children: <Widget>[
             ChatListScreen(), //i.e.first screen of app after logining
-            Center(
-              child: Text(
-                "Call Logs",
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
+            LogScreen(),
             Center(
               child: Text(
                 "Contact Screen",
